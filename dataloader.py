@@ -8,11 +8,11 @@ class EvalDataset(data.Dataset):
         if os.path.isdir(pred_root):
             pred_dirs = os.listdir(pred_root)
         else:
-            raise Exception('not dir')
+            raise Exception(pred_root + ' not dir')
         if os.path.isdir(label_root):
             label_dirs = os.listdir(label_root)
         else:
-            raise Exception('not dir')
+            raise Exception(label_root +' not dir')
         dir_name_list = []
         for idir in pred_dirs:
             if idir in label_dirs:
@@ -23,8 +23,6 @@ class EvalDataset(data.Dataset):
             map(lambda x: os.path.join(pred_root, x), dir_name_list))
         self.label_path = list(
             map(lambda x: os.path.join(label_root, x), dir_name_list))
-
-        print(self.image_path)
 
     def __getitem__(self, item):
         pred = Image.open(self.image_path[item]).convert('L')
