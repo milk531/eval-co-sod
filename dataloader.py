@@ -5,18 +5,18 @@ from PIL import Image
 
 class EvalDataset(data.Dataset):
     def __init__(self, pred_root, label_root):
-        pred_dirs = os.listdir(pred_root)
-        label_dirs = os.listdir(label_root)
-        # print(pred_dirs)
-        # print(label_dirs)
+        if os.path.isdir(pred_root):
+            pred_dirs = os.listdir(pred_root)
+        else:
+            raise Exception('not dir')
+        if os.path.isdir(label_root):
+            label_dirs = os.listdir(label_root)
+        else:
+            raise Exception('not dir')
         dir_name_list = []
         for idir in pred_dirs:
             if idir in label_dirs:
-                # pred_names = os.listdir(os.path.join(pred_root, idir))
-                # label_names = os.listdir(os.path.join(label_root, idir))
                 dir_name_list.append(idir)
-                # for iname in pred_names:
-                    # if iname in label_names:
                         
 
         self.image_path = list(

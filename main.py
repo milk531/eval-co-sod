@@ -27,10 +27,13 @@ def main(cfg):
     threads = []
     for dataset in dataset_names:
         for method in method_names:
-            loader = EvalDataset(osp.join(pred_dir, method, dataset),
-                                 osp.join(gt_dir, dataset))
-            thread = Eval_thread(loader, method, dataset, output_dir, cfg.cuda)
-            threads.append(thread)
+            try:
+                loader = EvalDataset(osp.join(pred_dir, method, dataset),
+                                    osp.join(gt_dir, dataset))
+                thread = Eval_thread(loader, method, dataset, output_dir, cfg.cuda)
+                threads.append(thread)
+            except Exception as error:
+                print('Caught this error: ' + repr(error))
     for thread in threads:
         print(thread.run())
 
