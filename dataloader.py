@@ -7,7 +7,8 @@ class EvalDataset(data.Dataset):
     def __init__(self, pred_root, label_root):
         pred_dirs = os.listdir(pred_root)
         label_dirs = os.listdir(label_root)
-
+        print(pred_dirs)
+        print(label_dirs)
         dir_name_list = []
         for idir in pred_dirs:
             if idir in label_dirs:
